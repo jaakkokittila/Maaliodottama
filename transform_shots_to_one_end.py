@@ -7,7 +7,7 @@ def transform_coordinates_to_one_end(match_shots):
     right_team_id = match_shots.iloc[0]['Right_team']
 
     for i, row in match_shots.iterrows():
-        if row['Shooting_team'] == left_team_id and (row['Period'] == 1 or row['Period'] == 3) or row['Shooting_team'] == right_team_id and row['Period'] == 2:
+        if row['Shooting_team'] == left_team_id and (row['Period'] == 1 or row['Period'] == 3 or row['Period'] == 4) or row['Shooting_team'] == right_team_id and row['Period'] == 2:
             new_x = -1 * (row['Shot_x'] - 1030)
             shots.loc[i, 'Shot_x'] = new_x
             new_y = -1 * (row['Shot_y'] - 515)
