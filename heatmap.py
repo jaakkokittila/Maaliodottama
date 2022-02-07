@@ -7,6 +7,10 @@ shots = pd.read_csv('data/transformed_shots.csv', encoding='cp1252')
 x = shots['Shot_x'].to_list()
 y = shots['Shot_y'].to_list()
 
+goals = shots[shots['Event_type'] == 'GOAL']
+goals_x = goals['Shot_x']
+goals_y = goals['Shot_y']
+
 rink = plt.imread('Rink.png')
 
 cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", ["white", "blue","violet","red"])
@@ -38,5 +42,13 @@ dropout_high = LinearSegmentedColormap('Dropout', cdict3)
 plt.xlim(0, 1030)
 plt.ylim(0, 515)
 plt.hexbin(x, y, cmap=dropout_high, gridsize=(60, 30))
+plt.colorbar()
+plt.imshow(rink, aspect='equal', extent=(0,1030,0,515))
+plt.show()
+
+plt.xlim(0, 1030)
+plt.ylim(0, 515)
+plt.hexbin(goals_x, goals_y, cmap=dropout_high, gridsize=(60, 30))
+plt.colorbar()
 plt.imshow(rink, aspect='equal', extent=(0,1030,0,515))
 plt.show()
