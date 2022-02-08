@@ -1,6 +1,6 @@
 import pandas as pd
 
-shots = pd.read_csv('data/transformed_shots.csv', encoding='cp1252')
+shots = pd.read_csv('data/transformed_shots.csv')
 
 def flip_match_to_other_end(match_id):
     match_shots = shots[shots['Match_id'] == int(match_id)]

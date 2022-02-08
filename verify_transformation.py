@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-shots = pd.read_csv('data/transformed_shots.csv', encoding='cp1252')
+shots = pd.read_csv('data/transformed_shots.csv')
 
 match_ids = shots.Match_id.unique()
 

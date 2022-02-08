@@ -24,7 +24,7 @@ else:
     write_mode = 'a'
 
 field_names = ['Match_id', 'Type', 'Time', 'Shooting_team', 'Left_team', 'Right_team', 'Period', 'Shot_x', 'Shot_y', 'Blocker', 'Shooter', 'Event_type']
-with open('data/shots.csv', mode=write_mode, encoding='cp1252') as shot_file:
+with open('data/shots.csv', mode=write_mode) as shot_file:
     shot_writer = csv.DictWriter(shot_file, fieldnames=field_names)
 
     if write_mode == 'w':

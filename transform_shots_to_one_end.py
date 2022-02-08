@@ -1,6 +1,6 @@
 import pandas as pd
 
-shots = pd.read_csv('data/shots.csv', encoding='cp1252')
+shots = pd.read_csv('data/shots.csv')
 
 def transform_coordinates_to_one_end(match_shots):
     left_team_id = match_shots.iloc[0]['Left_team']

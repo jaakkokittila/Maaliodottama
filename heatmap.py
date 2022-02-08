@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 from matplotlib.colors import LinearSegmentedColormap
 
-shots = pd.read_csv('data/transformed_shots.csv', encoding='cp1252')
+shots = pd.read_csv('data/transformed_shots.csv')
 x = shots['Shot_x'].to_list()
 y = shots['Shot_y'].to_list()
 
