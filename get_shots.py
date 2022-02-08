@@ -23,7 +23,7 @@ if saved_shots is None:
 else:
     write_mode = 'a'
 
-field_names = ['Match_id', 'Type', 'Shooting_team', 'Left_team', 'Right_team', 'Period', 'Shot_x', 'Shot_y', 'Blocker', 'Shooter', 'Event_type']
+field_names = ['Match_id', 'Type', 'Time', 'Shooting_team', 'Left_team', 'Right_team', 'Period', 'Shot_x', 'Shot_y', 'Blocker', 'Shooter', 'Event_type']
 with open('data/shots.csv', mode=write_mode, encoding='cp1252') as shot_file:
     shot_writer = csv.DictWriter(shot_file, fieldnames=field_names)
 
@@ -63,11 +63,12 @@ with open('data/shots.csv', mode=write_mode, encoding='cp1252') as shot_file:
                         period = shot['period']
                         shot_x = shot['shotX']
                         shot_y = shot['shotY']
+                        time = shot['gameTime']
                         blocker = shot['blockerId']
                         shooter = shot['shooterId']
 
                         shot_writer.writerow({'Match_id': match_id_with_season, 'Type': shot_type, 'Shooting_team': shooting_team, 'Left_team': left_team, 'Right_team': right_team,
-                                              'Period': period, 'Shot_x': shot_x, 'Shot_y': shot_y, 'Blocker': blocker, 'Shooter': shooter, 'Event_type': event_type})
+                                              'Period': period, 'Shot_x': shot_x, 'Shot_y': shot_y, 'Time': time, 'Blocker': blocker, 'Shooter': shooter, 'Event_type': event_type})
 
     shot_file.close()
 
