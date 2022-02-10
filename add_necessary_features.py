@@ -30,7 +30,7 @@ shots['Previous_shots'] = previous_shot_amounts
 shots = pd.get_dummies(shots, columns=['Type'])
 
 # These columns aren't useful in predicting goal probabilities
-shots = shots.drop(columns=['Event_type', 'Left_team', 'Right_team', 'Shooter', 'Shooting_team', 'Period', 'Blocker', 'Time'])
+shots = shots.drop(columns=['Event_type', 'Left_team', 'Right_team', 'Period', 'Blocker', 'Time'])
 
 # Standardize the coordinates so that they won't have a huge effect compared to other factors in predictions
 # As well as previous shots as it would range more than any other column

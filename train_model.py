@@ -1,7 +1,7 @@
-from matplotlib import testing
 import pandas as pd
 from sklearn.neighbors import KNeighborsRegressor
 import pickle
+from sklearn import metrics
 
 shots = pd.read_csv('data/shots_for_prediction.csv')
 
@@ -13,17 +13,18 @@ shots = pd.read_csv('data/shots_for_prediction.csv')
 
 training_set = shots.iloc[0:113098]
 testing_set = shots.iloc[113098:147062]
-validation_set = shots.iloc[147062:172600]
+validation_set = shots.iloc[147062:len(shots)]
 
-# I thought that a good way of calculating the accuracy of my expected goals predictor would be to see how close
-# the sum of the predictions gets to the actual amount of goals in the testing set.
-# Comparing a single shots difference to its' actual value would be a hard metric to evaluate as the numbers
-# would grow quite large instantly
+# I used AUC as the accuracy metric of the predictions as it was one that I am quite familiar with
+# I originally thought to compare the amount of expected goals and actual goals in the training set,
+# but that maybe gives too little emphasis on a single predictions accuracy and doesn't possibly
+# notice if there is something fundamentally wrong with the model
+
 def calculate_accuracy(pred_values, true_values):
-    predicted_goal_amount = sum(pred_values)
-    actual_goal_amount = sum(true_values)
+    fpr, tpr, thresholds = metrics.roc_curve(true_values, pred_values)
+    auc_score = metrics.auc(fpr, tpr)
 
-    return abs(predicted_goal_amount - actual_goal_amount)
+    return auc_score
 
 def fit_model(train_x, train_y, neighbors):
     knn = KNeighborsRegressor(n_neighbors=neighbors)
@@ -47,7 +48,7 @@ validation_x = validation_set[['Shot_x', 'Shot_y', 'Previous_shots', 'Type_EvenS
 validation_y = validation_set['Goal'].to_list()
 
 
-neighbors_to_test = (list(range(50, 351, 10)))
+neighbors_to_test = (list(range(50, 501, 10)))
 
 most_accurate_model_accuracy = 100000000
 most_accurate_model = None
@@ -62,7 +63,6 @@ for neighbor in neighbors_to_test:
     print('Neighbors: ', neighbor, ' ', accuracy)
 
 # Save the most accurate model so it doesn't have to retrained every time
-# It happened to be 350 neighbours
 model_saver = open('knn_model', 'wb')
 pickle.dump(most_accurate_model, model_saver)
 
