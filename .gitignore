@@ -1,3 +1,4 @@
 data/*
 drafts.py
 knn_model
+__pycache__/*
