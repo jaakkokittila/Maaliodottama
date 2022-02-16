@@ -17,13 +17,11 @@ def get_team_xg(team, match_shots):
 
     return team_xg
 
-def get_match_xg(match_id):
+def get_match_xg(match_id, home_id, away_id):
     match_shots = shots[shots['Match_id'] == int(match_id)]
 
-    match_teams = match_shots.Shooting_team.unique()
-
-    home_xg = get_team_xg(match_teams[0], match_shots)
-    away_xg = get_team_xg(match_teams[1], match_shots)
+    home_xg = get_team_xg(home_id, match_shots)
+    away_xg = get_team_xg(away_id, match_shots)
 
     return home_xg, away_xg
 
@@ -42,7 +40,7 @@ with open('data/match_expected_goals.csv', mode='w', encoding='cp1252') as xg_fi
         home_score = match['Home_score']
         away_score = match['Away_score']
 
-        home_xg, away_xg = get_match_xg(match_id)
+        home_xg, away_xg = get_match_xg(match_id, match['Home_id'], match['Away_id'])
 
         xg_writer.writerow({'Match_id': match_id, 'Home_name': home_name, 'Home_goals': home_score, 'Home_xg': home_xg,
                             'Away_name': away_name, 'Away_goals': away_score, 'Away_xg': away_xg})
