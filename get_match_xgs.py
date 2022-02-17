@@ -18,21 +18,21 @@ def get_team_xg(team, match_shots):
     return team_xg
 
 def get_match_xg(match_id, home_id, away_id):
-    match_shots = shots[shots['Match_id'] == int(match_id)]
+    match_shots = shots[shots['Id'] == int(match_id)]
 
     home_xg = get_team_xg(home_id, match_shots)
     away_xg = get_team_xg(away_id, match_shots)
 
     return home_xg, away_xg
 
-field_names = ['Match_id', 'Home_name', 'Home_goals', 'Home_xg', 'Away_name', 'Away_goals', 'Away_xg']
+field_names = ['Id', 'Home_name', 'Home_goals', 'Home_xg', 'Away_name', 'Away_goals', 'Away_xg']
 
 with open('data/match_expected_goals.csv', mode='w', encoding='cp1252') as xg_file:
     xg_writer = csv.DictWriter(xg_file, fieldnames=field_names)
     xg_writer.writeheader()
 
     for i, match in matches.iterrows():
-        match_id = match['Match_id']
+        match_id = match['Id']
 
         home_name = match['Home_name']
         away_name = match['Away_name']
@@ -42,7 +42,7 @@ with open('data/match_expected_goals.csv', mode='w', encoding='cp1252') as xg_fi
 
         home_xg, away_xg = get_match_xg(match_id, match['Home_id'], match['Away_id'])
 
-        xg_writer.writerow({'Match_id': match_id, 'Home_name': home_name, 'Home_goals': home_score, 'Home_xg': home_xg,
+        xg_writer.writerow({'Id': match_id, 'Home_name': home_name, 'Home_goals': home_score, 'Home_xg': home_xg,
                             'Away_name': away_name, 'Away_goals': away_score, 'Away_xg': away_xg})
 
     xg_file.close()

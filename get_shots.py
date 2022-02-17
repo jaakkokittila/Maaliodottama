@@ -1,30 +1,20 @@
 import requests
 import csv
-import pandas as pd
+import utilities as utils
 
 seasons = ['2018', '2019', '2020', '2021', '2022']
 
-def get_shots():
-    try:
-        return pd.read_csv('data/shots.csv')
-    except:
-        return None
-
-def check_if_match_is_saved(match_id, shots):
-    if shots is None:
-        return False
-    else:
-        return len(shots[shots['Match_id'] == int(match_id)]) > 0
-
-saved_shots = get_shots()
+shot_path = 'data/shots.csv'
+saved_shots = utils.read_dataframe(shot_path, None)
 
 if saved_shots is None:
     write_mode = 'w'
 else:
     write_mode = 'a'
 
-field_names = ['Match_id', 'Type', 'Time', 'Shooting_team', 'Left_team', 'Right_team', 'Period', 'Shot_x', 'Shot_y', 'Blocker', 'Shooter', 'Event_type']
-with open('data/shots.csv', mode=write_mode) as shot_file:
+field_names = ['Id', 'Type', 'Time', 'Shooting_team', 'Left_team', 'Right_team', 'Period', 'Shot_x', 'Shot_y', 'Blocker', 'Shooter', 'Event_type']
+
+with open(shot_path, mode=write_mode) as shot_file:
     shot_writer = csv.DictWriter(shot_file, fieldnames=field_names)
 
     if write_mode == 'w':
@@ -43,7 +33,7 @@ with open('data/shots.csv', mode=write_mode) as shot_file:
 
         for match_id in match_ids:
             match_id_with_season = str(match_id) + str(season)
-            match_saved = check_if_match_is_saved(match_id_with_season, saved_shots)
+            match_saved = utils.check_if_row_in_dataframe(match_id_with_season, saved_shots)
 
             if match_saved == False:
                 shot_base_url = 'https://liiga.fi/api/v1/shotmap/'
@@ -67,7 +57,7 @@ with open('data/shots.csv', mode=write_mode) as shot_file:
                         blocker = shot['blockerId']
                         shooter = shot['shooterId']
 
-                        shot_writer.writerow({'Match_id': match_id_with_season, 'Type': shot_type, 'Shooting_team': shooting_team, 'Left_team': left_team, 'Right_team': right_team,
+                        shot_writer.writerow({'Id': match_id_with_season, 'Type': shot_type, 'Shooting_team': shooting_team, 'Left_team': left_team, 'Right_team': right_team,
                                               'Period': period, 'Shot_x': shot_x, 'Shot_y': shot_y, 'Time': time, 'Blocker': blocker, 'Shooter': shooter, 'Event_type': event_type})
 
     shot_file.close()

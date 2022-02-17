@@ -12,7 +12,7 @@ goal = []
 previous_shot_amounts = []
 
 for i, row in shots.iterrows():
-    previous_shots = shots[(shots['Match_id'] == row['Match_id']) &
+    previous_shots = shots[(shots['Id'] == row['Id']) &
                            (shots['Shooting_team'] == row['Shooting_team']) &
                            (shots['Time'] >= row['Time'] - 20) &
                            (shots['Time'] < row['Time'])]
