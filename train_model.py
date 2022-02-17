@@ -50,17 +50,19 @@ validation_y = validation_set['Goal'].to_list()
 
 neighbors_to_test = (list(range(50, 501, 10)))
 
-most_accurate_model_accuracy = 100000000
+most_accurate_model_accuracy = 0
 most_accurate_model = None
 
 for neighbor in neighbors_to_test:
     model = fit_model(train_x, train_y, neighbor)
     accuracy = predict(model, test_x, test_y)
 
-    if accuracy < most_accurate_model_accuracy:
+    if accuracy > most_accurate_model_accuracy:
         most_accurate_model = model
+        most_accurate_model_accuracy = accuracy
 
     print('Neighbors: ', neighbor, ' ', accuracy)
+
 
 # Save the most accurate model so it doesn't have to retrained every time
 model_saver = open('knn_model', 'wb')

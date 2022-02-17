@@ -16,7 +16,7 @@ def transform_coordinates_to_one_end(match_shots):
 match_ids = shots.Match_id.unique()
 
 for match_id in match_ids:
-    match_shots = shots[(shots['Match_id'] == match_id)]
+    match_shots = shots[(shots['Id'] == match_id)]
     transform_coordinates_to_one_end(match_shots)
 
 shots.to_csv('data/transformed_shots.csv', index=False)
