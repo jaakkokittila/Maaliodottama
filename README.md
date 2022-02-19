@@ -7,13 +7,13 @@ Data used for model creation parsed from Liiga's APIs.
 
 ### Data collection
 
-```get_shots``` fetches and saves shot data to a csv file.
-```get_matches``` gathers match and player data. Takes the season that you want to add to the data as an argument.
-```transform_shots_to_one_end``` transforms the shot coordinates so that they are suitable for prediction.
-```verify_transformation``` is used for checking that the transformation was succesful.
-```fix_transformation``` removes the shots from data or fixes some that were transformed wrong.
-```heatmap``` is used for visualizing the shot coordinates to finally check that they make sense.
-```add_necessary_features``` adds the final features so that the model can work.
+```get_shots``` fetches and saves shot data to a csv file. <br/>
+```get_matches``` gathers match and player data. Takes the season that you want to add to the data as an argument. <br/>
+```transform_shots_to_one_end``` transforms the shot coordinates so that they are suitable for prediction. <br/>
+```verify_transformation``` is used for checking that the transformation was succesful. <br/>
+```fix_transformation``` removes the shots from data or fixes some that were transformed wrong. <br/>
+```heatmap``` is used for visualizing the shot coordinates to finally check that they make sense. <br/>
+```add_necessary_features``` adds the final features so that the model can work. <br/>
 
 ### Model creation
 
@@ -21,7 +21,7 @@ Data used for model creation parsed from Liiga's APIs.
 
 ### Model use
 
-```get_match_xgs``` gets match specific expected goals and saves them to a CSV file.
+```get_match_xgs``` gets match specific expected goals and saves them to a CSV file. <br/>
 ```get_player_xgs``` gets player speficic expected goals from season 2022 (for now) and saves them to a CSV file sorted highest to lowest.
 
 ### Others
