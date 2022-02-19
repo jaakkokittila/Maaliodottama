@@ -21,15 +21,7 @@ with open(shot_path, mode=write_mode) as shot_file:
         shot_writer.writeheader()
 
     for season in seasons:
-        url = url='https://liiga.fi/api/v1/games?tournament=runkosarja&season=' + season
-        request = requests.get(url)
-
-        matches = request.json()
-        match_ids = []
-
-        for match in matches:
-            if match['ended'] == True:
-                match_ids.append(match['id'])
+        match_ids = utils.get_match_ids(season)
 
         for match_id in match_ids:
             match_id_with_season = str(match_id) + str(season)

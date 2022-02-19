@@ -1,5 +1,8 @@
 import pandas as pd
 import pickle
+import requests
+
+# These are functions that are used in multiple files
 
 def read_dataframe(path, encoding):
     try:
@@ -20,4 +23,17 @@ def get_xg(shots):
     xg = sum(predictions)
 
     return xg
+
+def get_match_ids(season):
+    url = url='https://liiga.fi/api/v1/games?tournament=runkosarja&season=' + season
+    request = requests.get(url)
+
+    matches = request.json()
+    match_ids = []
+
+    for match in matches:
+        if match['ended'] == True:
+            match_ids.append(match['id'])
+
+    return match_ids
 
