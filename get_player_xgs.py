@@ -27,6 +27,7 @@ for i, player in players.iterrows():
     player_id = player['Id']
     player_shots = shots_2022[shots_2022['Shooter'] == int(player_id)]
 
+    # Only consider players with atleast 10 shots
     if len(player_shots) > 10:
         player_shots_for_prediction = player_shots[['Shot_x', 'Shot_y', 'Previous_shots', 'On_empty_net', 'Type_EvenStrengthShot', 'Type_PowerplayShot', 'Type_ShorthandedShot']]
 

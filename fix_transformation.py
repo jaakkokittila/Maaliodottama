@@ -13,7 +13,7 @@ def flip_match_to_other_end(match_id):
 # Something has gone with transforming these matches, so I'll just drop them since there aren't that many
 matches_to_drop = ['2192018', '222019', '232019', '3492020']
 
-# This match has just been transformed to the wrong end, so I'll just flip these coordinates the other way
+# These matches have just been transformed to the wrong end, so I'll just flip these coordinates the other way
 matches_to_flip = ['1192019', '6232021']
 
 for match in matches_to_drop:

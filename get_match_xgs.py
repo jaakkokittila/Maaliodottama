@@ -1,6 +1,4 @@
 import pandas as pd
-import pickle
-from sklearn.neighbors import KNeighborsRegressor
 import csv
 import utilities as utils
 
@@ -11,10 +9,10 @@ def get_match_xg(match_id, home_id, away_id):
     match_shots = shots[shots['Id'] == int(match_id)]
 
     home_shots = match_shots[match_shots['Shooting_team'] == home_id]
-    home_predictor_features = home_shots[['Shot_x', 'Shot_y', 'Previous_shots', 'Type_EvenStrengthShot', 'Type_PowerplayShot', 'Type_ShorthandedShot']]
+    home_predictor_features = home_shots[['Shot_x', 'Shot_y', 'Previous_shots', 'On_empty_net', 'Type_EvenStrengthShot', 'Type_PowerplayShot', 'Type_ShorthandedShot']]
 
     away_shots = match_shots[match_shots['Shooting_team'] == away_id]
-    away_predictor_features = away_shots[['Shot_x', 'Shot_y', 'Previous_shots', 'Type_EvenStrengthShot', 'Type_PowerplayShot', 'Type_ShorthandedShot']]
+    away_predictor_features = away_shots[['Shot_x', 'Shot_y', 'Previous_shots', 'On_empty_net', 'Type_EvenStrengthShot', 'Type_PowerplayShot', 'Type_ShorthandedShot']]
 
     home_xg = utils.get_xg(home_predictor_features)
     away_xg = utils.get_xg(away_predictor_features)

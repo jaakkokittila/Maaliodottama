@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import matplotlib
 from matplotlib.colors import LinearSegmentedColormap
 
+# Create a heatmap of shots and goals to make sure that my coordinate transformation was succesful
+
 shots = pd.read_csv('data/transformed_shots.csv')
 x = shots['Shot_x'].to_list()
 y = shots['Shot_y'].to_list()
@@ -12,6 +14,8 @@ goals_x = goals['Shot_x']
 goals_y = goals['Shot_y']
 
 rink = plt.imread('Rink.png')
+
+# This color map I just copied straight from Stack Overflow
 
 cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", ["white", "blue","violet","red"])
 
