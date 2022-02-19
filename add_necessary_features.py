@@ -6,6 +6,7 @@ def z_score(column):
   return (column - column.mean()) / column.std()
 
 goal = []
+on_empty_net = []
 
 # This feature is about how many shots there have been in the last 20 seconds, so for example if there have been many rebounds
 # or some other situation where a goal is more likely because there are many shots coming
@@ -22,10 +23,16 @@ for i, row in shots.iterrows():
     else:
         goal.append(0)
 
+    if row['Blocker'] == 0:
+        on_empty_net.append(1)
+    else:
+        on_empty_net.append(0)
+
     previous_shot_amounts.append(len(previous_shots))
 
 shots['Goal'] = goal
 shots['Previous_shots'] = previous_shot_amounts
+shots['On_empty_net'] = on_empty_net
 
 shots = pd.get_dummies(shots, columns=['Type'])
 

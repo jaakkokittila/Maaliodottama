@@ -13,7 +13,7 @@ def transform_coordinates_to_one_end(match_shots):
             new_y = -1 * (row['Shot_y'] - 515)
             shots.loc[i, 'Shot_y'] = new_y
 
-match_ids = shots.Match_id.unique()
+match_ids = shots.Id.unique()
 
 for match_id in match_ids:
     match_shots = shots[(shots['Id'] == match_id)]

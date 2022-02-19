@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 shots = pd.read_csv('data/transformed_shots.csv')
 
-match_ids = shots.Match_id.unique()
+match_ids = shots.Id.unique()
 
 
 # All shots have transformed so that they are shot at the left end of the rink

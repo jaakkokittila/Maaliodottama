@@ -38,13 +38,13 @@ def predict(model, test_x, test_y):
 
     return accuracy
 
-train_x = training_set[['Shot_x', 'Shot_y', 'Previous_shots', 'Type_EvenStrengthShot', 'Type_PowerplayShot', 'Type_ShorthandedShot']]
+train_x = training_set[['Shot_x', 'Shot_y', 'Previous_shots', 'On_empty_net', 'Type_EvenStrengthShot', 'Type_PowerplayShot', 'Type_ShorthandedShot']]
 train_y = training_set['Goal']
 
-test_x = testing_set[['Shot_x', 'Shot_y', 'Previous_shots', 'Type_EvenStrengthShot', 'Type_PowerplayShot', 'Type_ShorthandedShot']]
+test_x = testing_set[['Shot_x', 'Shot_y', 'Previous_shots', 'On_empty_net', 'Type_EvenStrengthShot', 'Type_PowerplayShot', 'Type_ShorthandedShot']]
 test_y = testing_set['Goal'].to_list()
 
-validation_x = validation_set[['Shot_x', 'Shot_y', 'Previous_shots', 'Type_EvenStrengthShot', 'Type_PowerplayShot', 'Type_ShorthandedShot']]
+validation_x = validation_set[['Shot_x', 'Shot_y', 'Previous_shots', 'On_empty_net', 'Type_EvenStrengthShot', 'Type_PowerplayShot', 'Type_ShorthandedShot']]
 validation_y = validation_set['Goal'].to_list()
 
 
